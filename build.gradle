@@ -1,12 +1,12 @@
-import static org.gradle.api.JavaVersion.VERSION_1_7
+import static org.gradle.api.JavaVersion.VERSION_1_8
 
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'osgi'
-apply plugin: 'signing'
+plugins {
+    id "java"
+    id "osgi"
+}
 
-sourceCompatibility = VERSION_1_7
-targetCompatibility = VERSION_1_7
+sourceCompatibility = VERSION_1_8
+targetCompatibility = VERSION_1_8
 archivesBaseName = "java-hamcrest"
 
 group = "org.hamcrest"
@@ -55,77 +55,6 @@ jar {
     }
 }
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-
-artifacts {
-    archives sourcesJar, javadocJar
-}
-
-signing {
-    required { gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
-}
-
-uploadArchives {
-    if (hasProperty('ossrhUsername') && hasProperty('ossrhPassword')) {
-        repositories {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
-                }
-
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
-                }
-
-                pom.project {
-                    name 'Java Hamcrest'
-                    packaging 'jar'
-                    description 'Hamcrest matcher library for Java'
-                    url 'http://hamcrest.org/JavaHamcrest/'
-
-                    scm {
-                        connection 'git@github.com:hamcrest/JavaHamcrest.git'
-                        url 'https://github.com/hamcrest/JavaHamcrest'
-                    }
-
-                    licenses {
-                        license {
-                            name 'BSD Licence 3'
-                            url 'http://opensource.org/licenses/BSD-3-Clause'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id 'joewalnes'
-                            name 'Joe Walnes'
-                        }
-                        developer {
-                            id 'npryce'
-                            name 'Nat Pryce'
-                        }
-                        developer {
-                            id 'sf105'
-                            name 'Steve Freeman'
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.8'
+    gradleVersion = '4.1'
 }

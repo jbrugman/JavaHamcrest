@@ -31,7 +31,7 @@ public interface Description {
      * Appends a list of values to the description.
      */
     <T> Description appendValueList(String start, String separator, String end,
-                                    T... values);
+                                    T[] values);
 
     /**
      * Appends a list of values to the description.
@@ -69,9 +69,10 @@ public interface Description {
         return this;
       }
 
+      @SafeVarargs
       @Override
-      public <T> Description appendValueList(String start, String separator,
-          String end, T... values) {
+      public final <T> Description appendValueList(String start, String separator,
+                                                   String end, T... values) {
         return this;
       }
 
