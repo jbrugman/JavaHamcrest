@@ -1,29 +1,33 @@
-package org.hamcrest;
+package org.hamcrest
 
 /**
- * <p>
+ *
+ *
  * A matcher over acceptable values.
  * A matcher is able to describe itself to give feedback when it fails.
- * </p>
- * <p>
- * Matcher implementations should <b>NOT directly implement this interface</b>.
- * Instead, <b>extend</b> the {@link BaseMatcher} abstract class,
+ *
+ *
+ *
+ * Matcher implementations should **NOT directly implement this interface**.
+ * Instead, **extend** the [BaseMatcher] abstract class,
  * which will ensure that the Matcher API can grow to support
  * new features and remain compatible with all Matcher implementations.
- * </p>
- * <p>
- * When using Hamcrest, there is no guarantee as to how often <code>matches()</code> or
- * <code>describeMismatch()</code> will be called, so the objects passed as
- * <code>actual</code> arguments should not change when referenced. If you're testing a
+ *
+ *
+ *
+ * When using Hamcrest, there is no guarantee as to how often `matches()` or
+ * `describeMismatch()` will be called, so the objects passed as
+ * `actual` arguments should not change when referenced. If you're testing a
  * stream, a good practice is to collect the contents of the stream before matching.
- * </p>
- * <p>
+ *
+ *
+ *
  * N.B. Well designed matchers should be immutable.
- * </p>
+ *
  *
  * @see BaseMatcher
  */
-public interface Matcher<T> extends SelfDescribing {
+interface Matcher<T> : SelfDescribing {
 
     /**
      * Evaluates the matcher for argument <var>item</var>.
@@ -34,24 +38,24 @@ public interface Matcher<T> extends SelfDescribing {
      * to check the correct type.
      *
      * @param actual the object against which the matcher is evaluated.
-     * @return <code>true</code> if <var>item</var> matches, otherwise <code>false</code>.
+     * @return `true` if <var>item</var> matches, otherwise `false`.
      *
      * @see BaseMatcher
      */
-    boolean matches(Object actual);
-    
+    fun matches(actual: Any?): Boolean
+
     /**
      * Generate a description of why the matcher has not accepted the item.
      * The description will be part of a larger description of why a matching
-     * failed, so it should be concise. 
-     * This method assumes that <code>matches(item)</code> is false, but 
+     * failed, so it should be concise.
+     * This method assumes that `matches(item)` is false, but
      * will not check this.
      *
      * @param actual The item that the Matcher has rejected.
      * @param mismatchDescription
-     *     The description to be built or appended to.
+     * The description to be built or appended to.
      */
-    void describeMismatch(Object actual, Description mismatchDescription);
+    fun describeMismatch(actual: Any?, mismatchDescription: Description)
 
     /**
      * This method simply acts a friendly reminder not to implement Matcher directly and
@@ -59,9 +63,10 @@ public interface Matcher<T> extends SelfDescribing {
      * compile errors .
      *
      * @see Matcher for reasons why.
+     *
      * @see BaseMatcher
-     * @deprecated to make
+     *
      */
-    @Deprecated
-    void _dont_implement_Matcher___instead_extend_BaseMatcher_();
+    @Deprecated("to make")
+    fun _dont_implement_Matcher___instead_extend_BaseMatcher_()
 }
