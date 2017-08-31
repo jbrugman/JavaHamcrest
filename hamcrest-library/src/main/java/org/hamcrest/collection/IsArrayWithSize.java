@@ -53,6 +53,6 @@ public class IsArrayWithSize<E> extends FeatureMatcher<E[], Integer> {
      * 
      */
     public static <E> Matcher<E[]> emptyArray() {
-        return describedAs("an empty array", IsArrayWithSize.<E>arrayWithSize(0));
+      return describedAs("an empty array", IsArrayWithSize.<E>arrayWithSize(0));
     }
 }

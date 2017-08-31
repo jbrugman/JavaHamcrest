@@ -170,7 +170,7 @@ public class Matchers {
    *     optional values to insert into the tokenised description
    */
   public static <T> org.hamcrest.Matcher<T> describedAs(java.lang.String description, org.hamcrest.Matcher<T> matcher, java.lang.Object... values) {
-    return org.hamcrest.core.DescribedAs.describedAs(description, matcher, values);
+    return org.hamcrest.core.DescribedAs.Companion.describedAs(description, matcher, values);
   }
 
   /**
@@ -250,7 +250,7 @@ public class Matchers {
    * @param itemMatcher
    *     the matcher to apply to items provided by the examined {@link Iterable}
    */
-  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(org.hamcrest.Matcher<? super T> itemMatcher) {
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItem(org.hamcrest.Matcher<T> itemMatcher) {
     return IsIterableContaining.hasItem(itemMatcher);
   }
 
@@ -265,7 +265,7 @@ public class Matchers {
    * @param item
    *     the item to compare against the items provided by the examined {@link Iterable}
    */
-  public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> hasItem(T item) {
+  public static <T> org.hamcrest.Matcher<java.lang.Iterable<T>> hasItem(T item) {
     return IsIterableContaining.hasItem(item);
   }
 

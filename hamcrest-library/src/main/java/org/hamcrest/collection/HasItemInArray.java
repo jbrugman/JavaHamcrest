@@ -12,12 +12,12 @@ import static java.util.Arrays.asList;
  * Matches if an array contains an item satisfying a nested matcher.
  */
 public class HasItemInArray<T> extends TypeSafeMatcher<T[]> {
-    private final Matcher<? super T> elementMatcher;
-    private final TypeSafeDiagnosingMatcher<Iterable<? super T>> collectionMatcher;
+    private final Matcher<T> elementMatcher;
+    private final TypeSafeDiagnosingMatcher<Iterable<T>> collectionMatcher;
 
-    public HasItemInArray(Matcher<? super T> elementMatcher) {
+    public HasItemInArray(Matcher<T> elementMatcher) {
         this.elementMatcher = elementMatcher;
-        this.collectionMatcher = new IsIterableContaining<>(elementMatcher);
+        this.collectionMatcher = new IsIterableContaining(elementMatcher);
     }
 
     @Override

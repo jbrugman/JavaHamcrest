@@ -28,7 +28,7 @@ public class ArrayMatching {
    *     the matcher to apply to elements in examined arrays
    */
   public static <T> Matcher<T[]> hasItemInArray(Matcher<? super T> elementMatcher) {
-      return new HasItemInArray<>(elementMatcher);
+      return new HasItemInArray(elementMatcher);
   }
 
   /**
